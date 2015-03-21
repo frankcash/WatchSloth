@@ -23,18 +23,56 @@ function foo(){
     // takePic();
   }
 }
-
+run = true; // sets second loop
 camera.on('ready', function() {
   console.log("On Ready");
   notificationLED.high();
   // takePic.then(function(){
   //   foo();
   // });
-  for(;;){
-    foo();
+  // for(;;){
+  //   foo();
+  //
+  // }
+  // takePic();
+  // takePic.then(function(){
+  //   // foo();
+  //   console.log("foo");
+  // });
 
-  }
+  // for(;;){
+  //   console.log("foo", run);
+  //   while(run){
+  //     if(myPin.rawRead() === 1){
+  //
+  //       console.log('Reading pin:', myPin.rawRead());
+  //       run = false;
+  //       resolvePic();
+  //       // takePic()
+  //     }else{
+  //       console.log('Reading pin:', myPin.rawRead());
+  //       // takePic();
+  //     }
+  //   }
+  // }
 
+  setInterval(function(){
+    if(myPin.rawRead() === 1){
+
+      console.log('Reading pin:', myPin.rawRead());
+
+      takePic().then(
+        function(){
+          console.log("f");
+        }
+      );
+      // takePic()
+
+    }else{
+      console.log('Reading pin:', myPin.rawRead());
+      // takePic();
+    }
+  }, 100);
 
 });
 
@@ -44,11 +82,20 @@ camera.on('error', function(err) {
 
 camera.on('picture', function(picture){
   console.log('We got a picture! Saving...');
+  run = true;
 });
+
+function resolvePic(){
+  takePic().then(
+    function(){
+      run = true;
+    }
+  );
+}
 
 
 function takePic(){
-    return Q(camera.takePicture(function(err, image) {
+    return Q.fcall(camera.takePicture(function(err, image) {
       if (err) {
         console.log('error taking image', err);
       }else{
@@ -73,6 +120,7 @@ function takePic(){
     //     process.sendfile(name, image);
     //     console.log('done.');
     //     camera.disable();
+    //     return Q("Foo");
     //   }
     // });
 
