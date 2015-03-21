@@ -11,50 +11,15 @@ function foo(){
   if(myPin.rawRead() === 1){
 
     console.log('Reading pin:', myPin.rawRead());
-    // takePic.then(
-    //   function(){
-    //     console.log("f");
-    //   }
-    // );
-    // takePic()
 
   }else{
     console.log('Reading pin:', myPin.rawRead());
-    // takePic();
   }
 }
 run = true; // sets second loop
 camera.on('ready', function() {
   console.log("On Ready");
   notificationLED.high();
-  // takePic.then(function(){
-  //   foo();
-  // });
-  // for(;;){
-  //   foo();
-  //
-  // }
-  // takePic();
-  // takePic.then(function(){
-  //   // foo();
-  //   console.log("foo");
-  // });
-
-  // for(;;){
-  //   console.log("foo", run);
-  //   while(run){
-  //     if(myPin.rawRead() === 1){
-  //
-  //       console.log('Reading pin:', myPin.rawRead());
-  //       run = false;
-  //       resolvePic();
-  //       // takePic()
-  //     }else{
-  //       console.log('Reading pin:', myPin.rawRead());
-  //       // takePic();
-  //     }
-  //   }
-  // }
 
   setInterval(function(){
     if(myPin.rawRead() === 1){
@@ -66,11 +31,9 @@ camera.on('ready', function() {
           console.log("f");
         }
       );
-      // takePic()
 
     }else{
       console.log('Reading pin:', myPin.rawRead());
-      // takePic();
     }
   }, 100);
 
@@ -99,7 +62,6 @@ function takePic(){
       if (err) {
         console.log('error taking image', err);
       }else{
-        // imageF = this.image;
         notificationLED.low();
         var name = 'picture-' + Math.floor(Date.now()*1000) + '.jpg';
         console.log('Picture saving as', name, '...');
@@ -109,19 +71,6 @@ function takePic(){
        }
     }));
 
-    // camera.takePicture(function(err, image) {
-    //   if (err) {
-    //     console.log('error taking image', err);
-    //   }else{
-    //     // imageF = this.image;
-    //     notificationLED.low();
-    //     var name = 'picture-' + Math.floor(Date.now()*1000) + '.jpg';
-    //     console.log('Picture saving as', name, '...');
-    //     process.sendfile(name, image);
-    //     console.log('done.');
-    //     camera.disable();
-    //     return Q("Foo");
-    //   }
-    // });
+
 
 }
