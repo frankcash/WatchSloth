@@ -1,5 +1,6 @@
 var tessel = require('tessel'); // import tessel
 var Q = require('q');
+var Yo = require('yo-api');
 var camera = require('camera-vc0706').use(tessel.port['A']);
 var gpio = tessel.port['GPIO']; // select the GPIO port
 
@@ -31,6 +32,8 @@ camera.on('ready', function() {
           console.log("f");
         }
       );
+
+      yo = new Yo("")
 
     }else{
       console.log('Reading pin:', myPin.rawRead());

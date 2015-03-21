@@ -28,6 +28,7 @@
   "homepage": "https://github.com/frankcash/WatchSloth",
   "dependencies": {
     "camera-vc0706": "^0.1.7",
-    "q": "^1.2.0"
+    "q": "^1.2.0",
+    "yo-api": "^1.1.2"
   }
 }
