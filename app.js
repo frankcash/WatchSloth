@@ -1,6 +1,7 @@
 var tessel = require('tessel'); // import tessel
 var Q = require('q');
 var Yo = require('yo-api');
+var config = require('./config/config');
 var camera = require('camera-vc0706').use(tessel.port['A']);
 var gpio = tessel.port['GPIO']; // select the GPIO port
 
@@ -8,19 +9,13 @@ var notificationLED = tessel.led[3]; // Set up an LED to notify when we're takin
 var myPin = gpio.pin['G4']; // on GPIO, can be gpio.digital[0] through 5 or gpio.pin['G3'] through ‘G6’
 myPin.output(1);
 
-function foo(){
-  if(myPin.rawRead() === 1){
+yo = new Yo(config.yo); // Initializes yo object
 
-    console.log('Reading pin:', myPin.rawRead());
 
-  }else{
-    console.log('Reading pin:', myPin.rawRead());
-  }
-}
-run = true; // sets second loop
 camera.on('ready', function() {
   console.log("On Ready");
   notificationLED.high();
+
 
   setInterval(function(){
     if(myPin.rawRead() === 1){
@@ -32,8 +27,7 @@ camera.on('ready', function() {
           console.log("f");
         }
       );
-
-      yo = new Yo("")
+      yo.yo("frankcash");
 
     }else{
       console.log('Reading pin:', myPin.rawRead());
@@ -51,14 +45,6 @@ camera.on('picture', function(picture){
   run = true;
 });
 
-function resolvePic(){
-  takePic().then(
-    function(){
-      run = true;
-    }
-  );
-}
-
 
 function takePic(){
     return Q.fcall(camera.takePicture(function(err, image) {
@@ -73,7 +59,4 @@ function takePic(){
         // camera.disable();
        }
     }));
-
-
-
 }
