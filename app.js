@@ -35,7 +35,7 @@ camera.on('ready', function() {
     }else{
       console.log('Reading pin:', myPin.rawRead());
     }
-  }, 100);
+  }, 10000);
 
 });
 
@@ -67,7 +67,7 @@ function takePic(){
         console.log('Picture saving as', name, '...');
         process.sendfile(name, image);
         console.log('done.');
-        camera.disable();
+        // camera.disable();
        }
     }));
 
