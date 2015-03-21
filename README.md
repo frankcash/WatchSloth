@@ -15,3 +15,7 @@ If you need your mac address for accessing wifi
 ```
 $ tessel wifi --mac
 ```
+
+# Making Your Own
+
+![Preview](https://github.com/frankcash/WatchSloth/blob/master/tessel-sketch.jpg)
