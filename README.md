@@ -18,4 +18,5 @@ $ tessel wifi --mac
 
 # Making Your Own
 
-![Preview](https://github.com/frankcash/WatchSloth/blob/master/tessel-sketch.jpg)
+![Preview](https://github.com/frankcash/WatchSloth/blob/master/tessel-magnetic.jpg)
+![Preview](https://github.com/frankcash/WatchSloth/blob/master/tessel-ir.jpg)
