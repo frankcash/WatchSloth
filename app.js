@@ -55,7 +55,7 @@ camera.on('ready', function() {
     }else{
       console.log('Reading pin:', magnet.rawRead());
     }
-  }, 10000);
+  }, 6000);
 
 });
 
