@@ -32,5 +32,10 @@
     "tessel-camera-s3": "^1.0.1",
     "tiny-router": "^0.1.4",
     "yo-api": "^1.1.2"
-  }
+  },
+  "files" : [
+    "LICENSE",
+    "app.js",
+    "node_modules"
+  ]
 }
