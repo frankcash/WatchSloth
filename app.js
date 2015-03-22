@@ -35,25 +35,28 @@ var s3Config = {
 
 
 var baseS3 = "https://s3.amazonaws.com/slothwatch/";
-
+var notBeingUsed = true;
 camera.on('ready', function() {
   console.log("On Ready");
   notificationLED.high();
 
   setInterval(function(){
-    if(magnet.rawRead() === 1 || ir.rawRead()===0){
+    if((magnet.rawRead() === 1 && notBeingUsed ) || (ir.rawRead()===0 && notBeingUsed) ){
       console.log('IR read', ir.rawRead());
       console.log('Magnet read:', magnet.rawRead());
-
+      notBeingUsed = !notBeingUsed;
       takePic().then(
         function(){
           console.log("f");
         }
       );
-      // yo.yo("frankcash");
 
     }else{
       console.log('Reading pin:', magnet.rawRead());
+      console.log("Not being used", notBeingUsed);
+      if(notBeingUsed === false){
+        notBeingUsed = !notBeingUsed;
+      }
     }
   }, 6000);
 
