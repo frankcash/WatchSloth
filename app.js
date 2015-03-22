@@ -8,8 +8,14 @@ var uploadImage = require('tessel-camera-s3');
 var camera = require('camera-vc0706').use(tessel.port['A']);
 var gpio = tessel.port['GPIO']; // select the GPIO port
 var notificationLED = tessel.led[3]; // Set up an LED to notify when we're taking a picture
-var myPin = gpio.pin['G4']; // on GPIO, can be gpio.digital[0] through 5 or gpio.pin['G3'] through ‘G6’
-myPin.output(1);
+var magnet = gpio.pin['G4']; // on GPIO, can be gpio.digital[0] through 5 or gpio.pin['G3'] through ‘G6’
+var ir = gpio.pin['G3']; // on GPIO, can be gpio.digital[0] through 5 or gpio.pin['G3'] through ‘G6’
+var B = tessel.port['B'];
+var D = tessel.port['D'];
+B.digital[1].output(1); // setting ‘true’ has the same effect
+D.digital[1].output(1); // setting ‘true’ has the same effect
+magnet.output(1);
+ir.input(1);
 
 yo = new Yo(config.yo); // Initializes yo object
 
@@ -20,14 +26,6 @@ function makeRand(len){
   text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
-// router.get('/yo/{username}', function(req, res){
-//   console.log(req.body);
-//   res.send(200);
-// });
-// router.get('/',function(req,res){
-//   res.send(200);
-// });
-// router.listen(3000);
 
 var s3Config = {
   key:config.key,
@@ -43,9 +41,9 @@ camera.on('ready', function() {
   notificationLED.high();
 
   setInterval(function(){
-    if(myPin.rawRead() === 1){
-
-      console.log('Reading pin:', myPin.rawRead());
+    if(magnet.rawRead() === 1 || ir.rawRead()===0){
+      console.log('IR read', ir.rawRead());
+      console.log('Magnet read:', magnet.rawRead());
 
       takePic().then(
         function(){
@@ -55,7 +53,7 @@ camera.on('ready', function() {
       // yo.yo("frankcash");
 
     }else{
-      console.log('Reading pin:', myPin.rawRead());
+      console.log('Reading pin:', magnet.rawRead());
     }
   }, 10000);
 
