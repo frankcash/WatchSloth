@@ -63,7 +63,7 @@ camera.on('ready', function() {
 });
 
 camera.on('error', function(err) {
-  console.error(err);
+  console.error("wifi error",err);
 });
 
 camera.on('picture', function(picture){
